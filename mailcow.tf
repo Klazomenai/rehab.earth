@@ -21,7 +21,7 @@ resource "digitalocean_droplet" "mailcow" {
 
   provisioner "remote-exec" {
     inline = [
-      "git clone https://github.com/Klazomenai/mailcow-dockerized",
+      "git clone https://github.com/andryyy/mailcow-dockerized",
       "cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.rehab.earth; export TZ=\"Europe/London\"; ./generate_config.sh",
       "cd ~/mailcow-dockerized/ && docker-compose up -d"
     ]
