@@ -7,6 +7,7 @@ resource "digitalocean_droplet" "mailcow" {
   region = "${var.region}"
   size = "2gb"
   private_networking = true
+  depends_on = ["digitalocean_droplet.firewall"]
   ssh_keys = [
     "${var.ssh_fingerprint}"
   ]
