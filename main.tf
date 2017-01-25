@@ -32,12 +32,12 @@ resource "digitalocean_droplet" "droplet" {
       "yum install -y docker",
       "chkconfig docker on",
       "systemctl start docker",
-      "curl -L \"https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose" 
-      "chmod +x /usr/local/bin/docker-compose"
+      "curl -L \"https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
+      "chmod +x /usr/local/bin/docker-compose",
       # Mailcow
       "yum install -y git",
       "git clone https://github.com/andryyy/mailcow-dockerized",
-      "cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.rehab.earth; export TZ=\"Europe/London\"; ./generate_config.sh"
+      "cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.rehab.earth; export TZ=\"Europe/London\"; ./generate_config.sh",
       "cd ~/mailcow-dockerized/ && docker-compose up -d"
     ]
   }
