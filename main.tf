@@ -20,6 +20,12 @@ resource "digitalocean_droplet" "droplet" {
     destination = "/tmp/iptables_config.sh"
   }
 
+  provisioner "file" {
+    source = "modules/docker/files/sysconfig_docker"
+    destination = "/tmp/docker"
+  }
+
+  # Section getting
   provisioner "remote-exec" {
     inline = [
       # Configure firewall iptables
@@ -30,8 +36,9 @@ resource "digitalocean_droplet" "droplet" {
       "/tmp/iptables_config.sh",
       # Docker
       "yum install -y docker",
+      "mv /tmp/docker /etc/sysconfig/docker",
       "chkconfig docker on",
-      "systemctl start docker",
+      "systemctl restart docker",
       "curl -L \"https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
       "chmod +x /usr/local/bin/docker-compose",
       # Mailcow
