@@ -1,6 +1,6 @@
-resource "digitalocean_droplet" "droplet" {
+resource "digitalocean_droplet" "mail" {
   image = "centos-7-x64"
-  name = "droplet"
+  name = "mail"
   region = "${var.region}"
   size = "2gb"
   private_networking = true
