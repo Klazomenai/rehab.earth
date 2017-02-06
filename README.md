@@ -25,7 +25,12 @@ After Sanity check.
 terraform apply
 ```
 
-# Acceptance 
+# Tests
+
+```sh
+bundle install
+kitchen test
+```
 
 # Realisation
 

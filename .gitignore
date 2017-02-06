@@ -2,3 +2,6 @@ terraform.tfstate
 terraform.tfstate.backup
 .terraform
 .donald_trump
+.kitchen/
+.kitchen.local.yml
+Gemfile.lock
