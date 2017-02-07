@@ -25,12 +25,17 @@ resource "digitalocean_droplet" "mail" {
     destination = "/tmp/docker"
   }
 
-  # Section getting
+  # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [
+      # Chef + Dependencies
+      "curl -L https://omnitruck.chef.io/install.sh | sudo bash",
+      "yum install -y git",
+      "cd && git clone https://github.com/Klazomenai/rehab.earth.git",
+      "cd ~/rehab.earth",
+      "chef-client --local",
       # Configure firewall iptables
       "systemctl disable firewalld",
-      "yum install -y iptables-services",
       "systemctl enable iptables",
       "chmod u+x /tmp/iptables_config.sh",
       "/tmp/iptables_config.sh",
@@ -44,10 +49,9 @@ resource "digitalocean_droplet" "mail" {
       # Mailcow
       "systemctl disable postfix",
       "systemctl stop postfix",
-      "yum install -y git",
-      "git clone https://github.com/andryyy/mailcow-dockerized",
+      "cd && git clone https://github.com/andryyy/mailcow-dockerized",
       "cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.rehab.earth; export TZ=\"Europe/London\"; ./generate_config.sh",
-      "cd ~/mailcow-dockerized/ && docker-compose up -d"
+      "cd ~/mailcow-dockerized/ && docker-compose up -d",
     ]
   }
 }
