@@ -33,7 +33,7 @@ resource "digitalocean_droplet" "mail" {
       "yum install -y git",
       "cd && git clone https://github.com/Klazomenai/rehab.earth.git",
       "cd ~/rehab.earth",
-      "chef-client --local -o recipe['iptables']",
+      "chef-client --local -o role['mailcow']",
       # Configure firewall iptables
       "chmod u+x /tmp/iptables_config.sh",
       "/tmp/iptables_config.sh",
