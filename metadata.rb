@@ -1,1 +1,2 @@
-name "iptables"
+name 'mailcow'
+depends 'iptables'

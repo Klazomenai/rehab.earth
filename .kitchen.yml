@@ -20,5 +20,5 @@ platforms:
 suites:
   - name: default
     run_list:
-        - recipe[iptables::default]
+        - recipe[mailcow::default]
     attributes:
