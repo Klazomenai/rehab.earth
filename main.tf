@@ -33,10 +33,8 @@ resource "digitalocean_droplet" "mail" {
       "yum install -y git",
       "cd && git clone https://github.com/Klazomenai/rehab.earth.git",
       "cd ~/rehab.earth",
-      "chef-client --local",
+      "chef-client --local -o ['iptables::default']",
       # Configure firewall iptables
-      "systemctl disable firewalld",
-      "systemctl enable iptables",
       "chmod u+x /tmp/iptables_config.sh",
       "/tmp/iptables_config.sh",
       # Docker

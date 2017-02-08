@@ -29,7 +29,7 @@ terraform apply
 
 ```sh
 bundle install
-kitchen test
+bundle exec kitchen test
 ```
 
 # Realisation

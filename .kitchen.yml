@@ -9,7 +9,10 @@ driver:
   ssh_key: <%= ENV['TF_VAR_pvt_key'] %>
 
 provisioner:
-  name: chef_solo
+  name: chef_zero
+
+verifier:
+  name: inspec
 
 platforms:
   - name: centos-7-x64
@@ -17,5 +20,5 @@ platforms:
 suites:
   - name: default
     run_list:
-        - recipe[iptables-services::default]
+        - recipe[iptables::default]
     attributes:
