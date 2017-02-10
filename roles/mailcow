@@ -1,3 +1,0 @@
-name "mailcow"
-description "The role of the MailCow droplet"
-run_list "recipe[iptables]"
