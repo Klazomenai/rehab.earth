@@ -1,1 +1,1 @@
-include_recipe 'iptables::default'
+include_recipe 'mailcow::firewall'

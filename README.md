@@ -28,6 +28,7 @@ terraform apply
 # Tests
 
 ```sh
+cd cookbooks/mailcow
 bundle install
 bundle exec kitchen test
 ```

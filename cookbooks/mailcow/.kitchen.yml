@@ -1,0 +1,31 @@
+---
+driver:
+  name: digitalocean
+  size: 2gb
+  region: lon1
+  image: centos-7-x64
+  digitalocean_access_token: <%= ENV['DO_PAT'] %>
+  ssh_key_ids: <%= ENV['TF_VAR_ssh_fingerprint'] %>
+  ssh_key: <%= ENV['TF_VAR_pvt_key'] %>
+
+provisioner:
+  name: chef_zero
+  # You may wish to disable always updating cookbooks in CI or other testing environments.
+  # For example:
+  #   always_update_cookbooks: <%= !ENV['CI'] %>
+  always_update_cookbooks: true
+
+verifier:
+  name: inspec
+
+platforms:
+  - name: centos-7-x64
+
+suites:
+  - name: default
+    run_list:
+      - recipe[mailcow::default]
+    verifier:
+      inspec_tests:
+        - test/smoke/default
+    attributes:
