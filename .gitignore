@@ -5,3 +5,4 @@ terraform.tfstate.backup
 .kitchen/
 .kitchen.local.yml
 Gemfile.lock
+Berksfile.lock

@@ -25,44 +25,37 @@ resource "digitalocean_droplet" "mail" {
     destination = "/tmp/docker"
   }
 
+  provisioner "file" {
+    source = "modules/mailcow/scripts/chef-prep.sh"
+    destination = "/tmp/chef-prep.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/chef-prep.sh",
+      "/tmp/chef-prep.sh"
+    ]
+  }
+
   # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [
-      # Because 'activesupport requires Ruby version >= 2.2.2.'
-      "yum -y install gcc-c++ patch readline readline-devel zlib zlib-devel",
-      "yum -y install libyaml-devel libffi-devel openssl-devel make",
-      "yum -y install bzip2 autoconf automake libtool bison iconv-devel sqlite-devel",
-      "curl -sSL https://rvm.io/mpapis.asc | gpg --import -",
-      "curl -L get.rvm.io | bash -s stable",
-      ". /etc/profile.d/rvm.sh",
-      "rvm reload",
-      "rvm requirements run",
-      "rvm install ruby-2.3.3",
-      "rvm use 2.3.3 --default",
-      "gem install bundler",
-      # Chef + Dependencies
-      "curl -L https://omnitruck.chef.io/install.sh | sudo bash",
-      "yum install -y git",
-      "cd && git clone https://github.com/Klazomenai/rehab.earth.git",
-      "cd ~/rehab.earth",
-      "bundle install",
-      "chef-client --local --override-runlist recipe['mailcow']",
       # Configure firewall iptables
-      "chmod u+x /tmp/iptables_config.sh",
-      "/tmp/iptables_config.sh",
+      #"chmod u+x /tmp/iptables_config.sh",
+      #"/tmp/iptables_config.sh",
       # Docker
-      "yum install -y docker",
-      "mv /tmp/docker /etc/sysconfig/docker",
-      "chkconfig docker on",
-      "systemctl restart docker",
-      "curl -L \"https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
-      "chmod +x /usr/local/bin/docker-compose",
+      #"yum install -y docker",
+      #"mv /tmp/docker /etc/sysconfig/docker",
+      #"chkconfig docker on",
+      #"systemctl restart docker",
+      #"curl -L \"https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
+      #"chmod +x /usr/local/bin/docker-compose",
       # Mailcow
-      "systemctl disable postfix",
-      "systemctl stop postfix",
-      "cd && git clone https://github.com/andryyy/mailcow-dockerized",
-      "cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.rehab.earth; export TZ=\"Europe/London\"; ./generate_config.sh",
-      "cd ~/mailcow-dockerized/ && docker-compose up -d",
+      #"systemctl disable postfix",
+      #"systemctl stop postfix",
+      #"cd && git clone https://github.com/andryyy/mailcow-dockerized",
+      #"cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.rehab.earth; export TZ=\"Europe/London\"; ./generate_config.sh",
+      #"cd ~/mailcow-dockerized/ && docker-compose up -d",
     ]
   }
 }
