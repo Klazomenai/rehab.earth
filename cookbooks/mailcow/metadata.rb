@@ -7,3 +7,4 @@ long_description 'Installs/Configures MailCow Droplet'
 version '0.1.0'
 
 depends 'firewall', '~> 2.5'
+depends 'docker', '~> 2.0'
