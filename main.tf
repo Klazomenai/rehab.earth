@@ -36,7 +36,7 @@ resource "digitalocean_droplet" "mail" {
   provisioner "remote-exec" {
     inline = [
       # Docker
-      #"yum install -y docker",
+      "yum install -y docker"
       #"mv /tmp/docker /etc/sysconfig/docker",
       #"chkconfig docker on",
       #"systemctl restart docker",
