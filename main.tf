@@ -16,11 +16,6 @@ resource "digitalocean_droplet" "mail" {
   }
 
   provisioner "file" {
-    source = "modules/iptables/files/config.sh"
-    destination = "/tmp/iptables_config.sh"
-  }
-
-  provisioner "file" {
     source = "modules/docker/files/sysconfig_docker"
     destination = "/tmp/docker"
   }
@@ -40,9 +35,6 @@ resource "digitalocean_droplet" "mail" {
   # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [
-      # Configure firewall iptables
-      #"chmod u+x /tmp/iptables_config.sh",
-      #"/tmp/iptables_config.sh",
       # Docker
       #"yum install -y docker",
       #"mv /tmp/docker /etc/sysconfig/docker",
