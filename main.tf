@@ -37,13 +37,15 @@ resource "digitalocean_droplet" "mail" {
       ". /etc/profile.d/rvm.sh",
       "rvm reload",
       "rvm requirements run",
-      "rvm install 2.2.4",
-      "rvm use 2.2.4 --default",
+      "rvm install ruby-2.3.3",
+      "rvm use 2.3.3 --default",
+      "gem install bundler",
       # Chef + Dependencies
       "curl -L https://omnitruck.chef.io/install.sh | sudo bash",
       "yum install -y git",
       "cd && git clone https://github.com/Klazomenai/rehab.earth.git",
       "cd ~/rehab.earth",
+      "bundle install",
       "chef-client --local --override-runlist recipe['mailcow']",
       # Configure firewall iptables
       "chmod u+x /tmp/iptables_config.sh",
