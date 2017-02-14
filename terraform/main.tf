@@ -30,6 +30,7 @@ resource "digitalocean_droplet" "mail" {
   # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [
+      "cd ~/rehab.earth",
       "chef-client --local --override-runlist recipe['mailcow']",
       # No Mailcow chef cookbook just yet
       "cd && git clone https://github.com/andryyy/mailcow-dockerized",
