@@ -36,9 +36,9 @@ resource "digitalocean_droplet" "mail" {
       "curl -L \"https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
       "chmod +x /usr/local/bin/docker-compose",
       # No Mailcow chef cookbook just yet
-      "cd && git clone https://github.com/andryyy/mailcow-dockerized",
+      "cd && git clone --branch only-ports-for-server-server-comms --depth 1 https://github.com/Klazomenai/mailcow-dockerized.git",
       "cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.${var.project}; export TZ=${var.tz}; ./generate_config.sh",
-      #"cd ~/mailcow-dockerized/ && docker-compose up -d",
+      "cd ~/mailcow-dockerized/ && docker-compose up -d"
     ]
   }
 }
