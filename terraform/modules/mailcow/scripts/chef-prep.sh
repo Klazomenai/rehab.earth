@@ -4,6 +4,8 @@
 # the bash way.
 
 # Because 'activesupport requires Ruby version >= 2.2.2.'
+# Apparently there is a better way than installing all the things on the node,
+# investiage tarring up post 'berks vendor' and use Terraform to transfer the tar.
 yum -y install gcc-c++ patch readline readline-devel zlib zlib-devel
 yum -y install libyaml-devel libffi-devel openssl-devel make
 yum -y install bzip2 autoconf automake libtool bison iconv-devel sqlite-devel
@@ -23,4 +25,3 @@ cd && git clone https://github.com/Klazomenai/rehab.earth.git
 cd ~/rehab.earth
 bundle install
 berks vendor cookbooks/
-chef-client --local --override-runlist recipe['mailcow']

@@ -6,7 +6,8 @@ Ensure variables are available according to your shell of choice.
 ```sh
 # Personal
 export user=""
-export project=""
+export TF_VAR_project=""
+export TF_VAR_tz=""
 # Generated from Digital Ocean
 export TF_VAR_ssh_fingerprint=""
 export TF_VAR_do_token=""

@@ -30,11 +30,10 @@ resource "digitalocean_droplet" "mail" {
   # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [
-      # Mailcow
-      "systemctl disable postfix",
-      "systemctl stop postfix"
-      #"cd && git clone https://github.com/andryyy/mailcow-dockerized",
-      #"cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.rehab.earth; export TZ=\"Europe/London\"; ./generate_config.sh",
+      "chef-client --local --override-runlist recipe['mailcow']",
+      # No Mailcow chef cookbook just yet
+      "cd && git clone https://github.com/andryyy/mailcow-dockerized",
+      "cd ~/mailcow-dockerized && export MAILCOW_HOSTNAME=mail.${var.project}; export TZ=${var.tz}; ./generate_config.sh",
       #"cd ~/mailcow-dockerized/ && docker-compose up -d",
     ]
   }
