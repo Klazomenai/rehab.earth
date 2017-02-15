@@ -20,20 +20,23 @@ export TF_VAR_pvt_key="$HOME/.ssh/${user}.${project}_rsa"
 
 Running with Terraform v0.8.4.
 ```sh
+pushd terraform
 terraform plan
 ```
 
 After Sanity check.
 ```sh
 terraform apply
+popd
 ```
 
 # Tests
 
 ```sh
-cd cookbooks/mailcow
+pushd cookbooks/mailcow
 bundle install
 bundle exec kitchen test
+popd
 ```
 
 # Realisation
@@ -41,10 +44,12 @@ bundle exec kitchen test
 # Termination
 
 ```sh
+pushd terraform
 terraform plan -destroy
 ```
 
 After sanity check.
 ```sh
 terraform destroy
+popd
 ```
