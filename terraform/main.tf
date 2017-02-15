@@ -4,8 +4,13 @@ resource "digitalocean_droplet" "mail" {
   region = "${var.region}"
   size = "2gb"
   private_networking = true
+
   ssh_keys = [
     "${var.ssh_fingerprint}"
+  ]
+
+  volume_ids = [
+    "${digitalocean_volume.mail.id}"
   ]
 
   connection {
