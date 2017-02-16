@@ -9,10 +9,6 @@ resource "digitalocean_droplet" "mail" {
     "${var.ssh_fingerprint}"
   ]
 
-  volume_ids = [
-    "${digitalocean_volume.mail.id}"
-  ]
-
   connection {
     user = "root"
     type = "ssh"

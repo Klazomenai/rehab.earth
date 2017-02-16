@@ -1,6 +1,6 @@
 # Abstraction
 
-DigitalOcean + Docker + Terrform + MailCow + Chef + Inspec
+Sandpit for: DigitalOcean, Terrform, Docker, Concourse, MailCow, Chef, Inspec
 
 # Inception
 
