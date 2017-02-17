@@ -41,9 +41,16 @@ popd
 
 # Realisation
 
-Connection to hosts is via tunnels until VNP is configured
+Connection to hosts is via tunnels until VNP is configured.
+
+Consul
 ```sh
-ssh -v -L localhost:8080:${CONCOURSE_INTERNA_IP}:8080 -i ~/.ssh/mr.t_rsa root@${BASTION_EXTERNAL_IP}
+ssh -v -L 8501:${BOOTSTRAP_INTERNAL_IP}:8501 -i ~/.ssh/mr.t_rsa root@${BASTION_EXTERNAL_IP}
+```
+
+Concourse
+```sh
+ssh -v -L 8080:${BOOTSTRAP_INTERNAL_IP}:8080 -i ~/.ssh/mr.t_rsa root@${BASTION_EXTERNAL_IP}
 ```
 
 # Termination
