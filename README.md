@@ -41,6 +41,11 @@ popd
 
 # Realisation
 
+Connecting to hosts via tunnels until VNP
+```sh
+ssh -v -L localhost:8080:${CONCOURSE_IP}:8080 -i ~/.ssh/mr.t_rsa root@${BASTION_IP}
+```
+
 # Termination
 
 ```sh
