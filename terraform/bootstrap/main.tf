@@ -53,7 +53,7 @@ resource "digitalocean_droplet" "bootstrap" {
       # Droplan Cron
       "mv /tmp/concourse-refresh.sh /opt/droplan/refresh.sh",
       "chmod u+x /opt/droplan/refresh.sh",
-      "crontab -l | { cat; echo \"*/1 * * * * root PATH=/sbin:/usr/bin:/bin DO_KEY=personal_access_token /opt/droplan/refresh.sh > /var/log/droplan.log 2>&1\"; } | crontab -",
+      "crontab -l | { cat; echo \"*/1 * * * * root PATH=/sbin:/usr/bin:/bin DO_KEY=${var.do_token} /opt/droplan/refresh.sh > /var/log/droplan.log 2>&1\"; } | crontab -",
       # Docker
       "yum install -y docker",
       "mv -f /tmp/docker-sysconfig /etc/sysconfig/docker",
@@ -84,7 +84,7 @@ resource "digitalocean_droplet" "bootstrap" {
       "mv fly /usr/local/bin/fly",
       "chmod u+x /usr/local/bin/fly",
       # Need Consul and Vault!
-      #"fly -t lite login -c http://10.135.25.152:8080 --username=concourse --password=changeme",
+      #"fly -t lite login -c http://bootstrap:8080 --username=concourse --password=changeme",
     ]
   }
 }
