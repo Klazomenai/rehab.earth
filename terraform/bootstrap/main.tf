@@ -22,6 +22,11 @@ resource "digitalocean_droplet" "concourse" {
   }
 
   provisioner "file" {
+    source = "etc/consul/docker-compose.yml"
+    destination = "/tmp/consul-docker-compose.yml"
+  }
+
+  provisioner "file" {
     source = "bin/concourse/refresh.sh"
     destination = "/tmp/concourse-refresh.sh"
   }
@@ -49,7 +54,9 @@ resource "digitalocean_droplet" "concourse" {
       "mv /tmp/concourse-refresh.sh /opt/droplan/refresh.sh",
       "chmod u+x /opt/droplan/refresh.sh",
       "crontab -l | { cat; echo \"*/1 * * * * root PATH=/sbin:/usr/bin:/bin DO_KEY=personal_access_token /opt/droplan/refresh.sh > /var/log/droplan.log 2>&1\"; } | crontab -",
-      "crontab -l",
+      # Consul
+      "mkdir ~/consul",
+      "mv /tmp/consul-docker-compose.yml ~/consul/docker-compose.yml",
       # Docker
       "yum install -y docker",
       "mv -f /tmp/docker-sysconfig /etc/sysconfig/docker",
@@ -68,6 +75,12 @@ resource "digitalocean_droplet" "concourse" {
       "cp ./keys/worker/worker_key.pub ./keys/web/authorized_worker_keys",
       "cp ./keys/web/tsa_host_key.pub ./keys/worker",
       "docker-compose up -d",
+      # Maybe a job for a jobs container
+      "wget -O fly -q https://github.com/concourse/concourse/releases/download/v2.7.0/fly_linux_amd64",
+      "mv fly /usr/local/bin/fly",
+      "chmod u+x /usr/local/bin/fly",
+      # Need Consul and Vault!
+      #"fly -t lite login -c http://10.135.25.152:8080 --username=concourse --password=changeme",
     ]
   }
 }
