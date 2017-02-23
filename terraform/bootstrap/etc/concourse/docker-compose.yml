@@ -27,3 +27,4 @@ concourse-worker:
   volumes: ["./keys/worker:/concourse-keys"]
   environment:
     CONCOURSE_TSA_HOST: concourse-web
+    CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8

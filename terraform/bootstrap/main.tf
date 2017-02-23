@@ -36,6 +36,11 @@ resource "digitalocean_droplet" "bootstrap" {
     destination = "/tmp/docker-sysconfig"
   }
 
+  provisioner "file" {
+    source = "etc/concourse/hello-world.yml"
+    destination = "/tmp/concourse-hello-world.yml"
+  }
+
   # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [
@@ -61,6 +66,13 @@ resource "digitalocean_droplet" "bootstrap" {
       "systemctl start docker",
       "curl -L \"https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
       "chmod +x /usr/local/bin/docker-compose",
+      # godope
+      "pushd /tmp",
+      "wget https://github.com/Klazomenai/godope/releases/download/v0.0.1/godope_0.0.1_amd64.tar.gz",
+      "tar -xzvf godope_0.0.1_amd64.tar.gz",
+      "DO_KEY=${var.do_token} /tmp/godope",
+      "cat /etc/hosts",
+      "popd",
       # Consul
       "mkdir ~/consul",
       "mv /tmp/consul-docker-compose.yml ~/consul/docker-compose.yml",
@@ -83,8 +95,13 @@ resource "digitalocean_droplet" "bootstrap" {
       "wget -O fly -q https://github.com/concourse/concourse/releases/download/v2.7.0/fly_linux_amd64",
       "mv fly /usr/local/bin/fly",
       "chmod u+x /usr/local/bin/fly",
-      # Need Consul and Vault!
-      #"fly -t lite login -c http://bootstrap:8080 --username=concourse --password=changeme",
+      # Looks like concourse needs a little sleep before it wakes up, this sleep needs sorting properly
+      "sleep 20",
+      # Need Vault!
+      "fly --target lite login --concourse-url http://bootstrap:8080 --username=concourse --password=changeme",
+      # The start of the beginning and the end of bootstrap
+      "fly --target lite set-pipeline --non-interactive --pipeline hello-world --config /tmp/concourse-hello-world.yml",
+      "fly --target lite unpause-pipeline --pipeline hello-world",
     ]
   }
 }

@@ -30,18 +30,23 @@ resource "digitalocean_droplet" "bastion" {
       "mkdir /opt/droplan",
       "mv ./droplan /opt/droplan/",
       "DO_KEY=${var.do_token} /opt/droplan/droplan",
-      # Debug
-      "iptables -L -v",
       # FW
       "sudo systemctl stop firewalld",
       "sudo systemctl mask firewalld",
       "systemctl enable iptables",
       "sudo service iptables save",
-      #Cron
+      # Cron
       "mv /tmp/concourse-refresh.sh /opt/droplan/refresh.sh",
       "chmod u+x /opt/droplan/refresh.sh",
       "crontab -l | { cat; echo \"*/1 * * * * root PATH=/sbin:/usr/bin:/bin DO_KEY=personal_access_token /opt/droplan/refresh.sh > /var/log/droplan.log 2>&1\"; } | crontab -",
       "crontab -l",
+      # godope
+      "pushd /tmp",
+      "wget https://github.com/Klazomenai/godope/releases/download/v0.0.1/godope_0.0.1_amd64.tar.gz",
+      "tar -xzvf godope_0.0.1_amd64.tar.gz",
+      "DO_KEY=${var.do_token} /tmp/godope",
+      "cat /etc/hosts",
+      "popd",
     ]
   }
 }
