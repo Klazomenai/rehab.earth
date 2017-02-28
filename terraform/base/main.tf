@@ -26,10 +26,6 @@ resource "digitalocean_droplet" "base" {
       "uname -r",
       # or possibly update-grub
       "grub2-set-default 0",
-      # Docker
-      "yum install -y docker",
-      "systemctl start docker",
-      "sudo systemctl enable docker",
     ]
   }
 }

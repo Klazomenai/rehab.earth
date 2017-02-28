@@ -20,5 +20,5 @@ export TF_VAR_base_id="<<insert_ID_here>>"
 
 When done with base, clean up.
 ```sh
-doctl compute image delete <<base-image-ID>>
+doctl compute image delete $TF_VAR_base_id
 ```
