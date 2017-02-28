@@ -8,7 +8,7 @@ Ideally the base would come from DigitalOcean, and would not need to build on to
 ```sh
 terraform plan
 #terraform apply
-doctl compute droplet-action snapshot $(terraform output ID) --snapshot-name base --wait`
+doctl compute droplet-action snapshot $(terraform output ID) --snapshot-name base --wait
 terraform plan -destroy
 #terraform destroy
 ```
