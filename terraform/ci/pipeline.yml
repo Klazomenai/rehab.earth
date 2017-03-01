@@ -13,7 +13,7 @@ jobs:
       platform: linux
       image_resource:
         type: docker-image
-        source: {repository: sideci/ubuntu14.04-ruby-bundler}
+        source: {repository: ruby:alpine}
       inputs:
         - name: resource-rehab-earth
       run:
