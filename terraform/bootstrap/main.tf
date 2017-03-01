@@ -32,8 +32,8 @@ resource "digitalocean_droplet" "bootstrap" {
   }
 
   provisioner "file" {
-    source = "etc/concourse/hello-world.yml"
-    destination = "/tmp/concourse-hello-world.yml"
+    source = "../ci/pipeline.yml"
+    destination = "/tmp/pipeline.yml"
   }
 
   # Set up chef. No chef-client --local provisioner yet
@@ -79,8 +79,8 @@ resource "digitalocean_droplet" "bootstrap" {
       # Need Vault!
       "fly --target lite login --concourse-url http://bootstrap:8080 --username=concourse --password=changeme",
       # The start of the beginning and the end of bootstrap
-      "fly --target lite set-pipeline --non-interactive --pipeline hello-world --config /tmp/concourse-hello-world.yml",
-      "fly --target lite unpause-pipeline --pipeline hello-world",
+      "fly --target lite set-pipeline --non-interactive --pipeline infra --config /tmp/pipeline.yml",
+      "fly --target lite unpause-pipeline --pipeline infra",
     ]
   }
 }
