@@ -2,7 +2,7 @@
 
 set -o -x errexit
 
-pushd ../cookbooks/mailcow
+pushd cookbooks/mailcow
 bundle install
 bundle exec kitchen test
 popd
