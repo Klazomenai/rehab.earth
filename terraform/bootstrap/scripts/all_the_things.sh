@@ -6,6 +6,11 @@ set -e -o -x errexit
 # Things must go in Chef!
 
 #
+# Pre-reqs
+#
+yum install -y git
+
+#
 # Pull off git
 #
 pushd ~
