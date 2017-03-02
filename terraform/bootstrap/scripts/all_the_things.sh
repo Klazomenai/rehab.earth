@@ -27,9 +27,10 @@ curl -L "https://github.com/docker/compose/releases/download/1.11.2/docker-compo
 chmod +x /usr/local/bin/docker-compose
 
 #
-# Consul
+# Vault
 #
 pushd ~/rehab.earth/docker/vault
+docker-compose build
 docker-compose up -d
 popd
 
