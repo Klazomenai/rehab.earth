@@ -13,7 +13,9 @@ jobs:
       platform: linux
       image_resource:
         type: docker-image
-        source: {repository: ruby:alpine}
+        source:
+          repository: ruby
+          tag: alpine
       inputs:
         - name: resource-rehab-earth
       run:
