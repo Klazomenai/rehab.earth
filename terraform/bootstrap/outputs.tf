@@ -3,9 +3,9 @@ output "ID" {
 }
 
 output "Public_IP" {
-    value = "${digitalocean_droplet.bootstrap.public_ip}"
+    value = "${digitalocean_droplet.bootstrap.ipv4_address}"
 }
 
 output "Private_IP" {
-    value = "${digitalocean_droplet.bootstrap.private_ip}"
+    value = "${digitalocean_droplet.bootstrap.ipv4_address_private}"
 }
