@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -o -x errexit
+set -e -o -x errexit
 
 pushd cookbooks/mailcow
 bundle install
