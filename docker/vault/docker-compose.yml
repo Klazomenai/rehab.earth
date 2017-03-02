@@ -1,0 +1,11 @@
+---
+version: "2"
+services:
+  vault:
+    image: vault
+    build: ./
+    hostname: vault
+    cap_add:
+      - IPC_LOCK
+    ports:
+      - "8200:8200"

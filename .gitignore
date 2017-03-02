@@ -4,5 +4,6 @@ terraform.tfstate.backup
 .donald_trump
 .kitchen/
 .kitchen.local.yml
+.DS_Store
 Gemfile.lock
 Berksfile.lock
