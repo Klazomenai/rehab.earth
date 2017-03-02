@@ -62,5 +62,5 @@ sleep 20
 # The start of the beginning and the end of bootstrap
 # Starting to really need Vault!
 fly --target lite login --concourse-url http://bootstrap:8080 --username=concourse --password=changeme
-fly --target lite set-pipeline --non-interactive --pipeline infra --config /tmp/pipeline.yml
+fly --target lite set-pipeline --non-interactive --pipeline infra --config ~/rehab.earth/ci/pipeline.yml
 fly --target lite unpause-pipeline --pipeline infra
