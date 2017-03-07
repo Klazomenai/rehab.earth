@@ -4,6 +4,9 @@ Sandpit for: DigitalOcean, Terrform, Docker, Concourse, MailCow, Chef, Inspec
 
 # Inception
 
+Create base image and ensure relevant env var is exported:
+[terraform/base/README.md](https://github.com/Klazomenai/rehab.earth/blob/master/terraform/base/README.md)
+
 Ensure variables are available according to your shell of choice.
 ```sh
 # Personal
