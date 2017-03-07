@@ -1,5 +1,5 @@
 ---
-version: "3"
+version: "2"
 services:
   consul1:
     command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 0.0.0.0 -bind 0.0.0.0 -server -bootstrap
