@@ -6,11 +6,11 @@ services:
     image: consul
     hostname: consul1
     ports:
-      - "8301:8300"
-      - "8401:8400"
-      - "8501:8500"
-      - "8601:8600"
-      - "9001:9001"
+      - "127.0.0.1:8301:8300"
+      - "127.0.0.1:8401:8400"
+      - "127.0.0.1:8501:8500"
+      - "127.0.0.1:8601:8600"
+      - "127.0.0.1:9001:9001"
 
   consul2:
     command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 0.0.0.0 -bind 0.0.0.0 -server -rejoin -retry-join=consul1
@@ -19,11 +19,11 @@ services:
     depends_on:
       - consul1
     ports:
-      - "8302:8300"
-      - "8402:8400"
-      - "8502:8500"
-      - "8602:8600"
-      - "9002:9001"
+      - "127.0.0.1:8302:8300"
+      - "127.0.0.1:8402:8400"
+      - "127.0.0.1:8502:8500"
+      - "127.0.0.1:8602:8600"
+      - "127.0.0.1:9002:9001"
 
   consul3:
     command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 0.0.0.0 -bind 0.0.0.0 -server -rejoin -retry-join=consul1
@@ -32,8 +32,8 @@ services:
     depends_on:
       - consul1
     ports:
-      - "8303:8300"
-      - "8403:8400"
-      - "8503:8500"
-      - "8603:8600"
-      - "9003:9001"
+      - "127.0.0.1:8303:8300"
+      - "127.0.0.1:8403:8400"
+      - "127.0.0.1:8503:8500"
+      - "127.0.0.1:8603:8600"
+      - "127.0.0.1:9003:9001"
