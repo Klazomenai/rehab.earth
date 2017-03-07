@@ -1,5 +1,5 @@
 resource "digitalocean_droplet" "mail" {
-  image = "centos-7-x64"
+  image = "${var.base_id}"
   name = "mail"
   region = "${var.region}"
   size = "2gb"
@@ -34,7 +34,7 @@ resource "digitalocean_droplet" "mail" {
       "cd ~/rehab.earth",
       "chef-client --local --override-runlist recipe['mailcow']",
       # Docker Compose - until using cookbook
-      "curl -L \"https://github.com/docker/compose/releases/download/1.10.0/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
+      "curl -L \"https://github.com/docker/compose/releases/download/1.11.2/docker-compose-$(uname -s)-$(uname -m)\" -o /usr/local/bin/docker-compose",
       "chmod +x /usr/local/bin/docker-compose",
       # No Mailcow chef cookbook just yet
       "cd && git clone --branch only-ports-for-server-server-comms --depth 1 https://github.com/Klazomenai/mailcow-dockerized.git",
