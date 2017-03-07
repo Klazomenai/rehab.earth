@@ -20,7 +20,6 @@ gem install bundler
 
 # Chef + Dependencies
 curl -L https://omnitruck.chef.io/install.sh | sudo bash
-yum install -y git
 cd && git clone https://github.com/Klazomenai/rehab.earth.git
 cd ~/rehab.earth
 bundle install

@@ -22,6 +22,8 @@ resource "digitalocean_droplet" "base" {
       "rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org",
       "rpm -Uvh http://www.elrepo.org/elrepo-release-7.0-2.el7.elrepo.noarch.rpm",
       "yum --enablerepo=elrepo-kernel -y install kernel-ml",
+      # Core tools
+      "yum -y install git",
       # debug
       "uname -r",
       # or possibly update-grub
