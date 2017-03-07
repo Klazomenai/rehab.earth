@@ -13,12 +13,17 @@ terraform plan -destroy
 terraform destroy
 ```
 
-Bootstrap is dependent on the Base ID
+Bootstrap is dependent on the Base ID, get image id:
+```sh
+doctl compute image list|grep base
+```
+
+and add it to relevant exports for your env:
 ```sh
 export TF_VAR_base_id="<<insert_ID_here>>"
 ```
 
-When done with base, clean up.
+When done with base (i.e. when environment is destroyed), clean up.
 ```sh
 doctl compute image delete $TF_VAR_base_id
 ```
