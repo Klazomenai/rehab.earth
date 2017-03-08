@@ -23,17 +23,19 @@ chmod +x /usr/local/bin/docker-compose
 docker network create rehab.earth
 
 #
+# Consul
+#
+pushd ~/rehab.earth/docker/consul
+docker-compose up -d
+popd
+# Give consul a bit of time to wake, better poll could be used here
+sleep 10
+
+#
 # Vault
 #
 pushd ~/rehab.earth/docker/vault
 docker-compose build
-docker-compose up -d
-popd
-
-#
-# Consul
-#
-pushd ~/rehab.earth/docker/consul
 docker-compose up -d
 popd
 
