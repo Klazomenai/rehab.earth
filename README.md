@@ -1,13 +1,26 @@
 # Abstraction
 
-Sandpit for: DigitalOcean, Terrform, Docker, Concourse, MailCow, Chef, Inspec
+Sandpit for spinning up a basic MailCow instance.
+
+The current stack: DigitalOcean, Terraform, Docker, Chef, Inspec.
+
+Coming: Consul, Vault, Concourse.
+
+# Tests
+
+```sh
+pushd cookbooks/mailcow
+bundle install
+bundle exec kitchen test
+popd
+```
 
 # Inception
 
 Create base image and ensure relevant env var is exported:
 [terraform/base/README.md](https://github.com/Klazomenai/rehab.earth/blob/master/terraform/base/README.md)
 
-Ensure variables are available according to your shell of choice.
+Ensure the following variables are also available according to your shell of choice.
 ```sh
 # Personal
 export user=""
@@ -31,29 +44,6 @@ After Sanity check.
 ```sh
 terraform apply
 popd
-```
-
-# Tests
-
-```sh
-pushd cookbooks/mailcow
-bundle install
-bundle exec kitchen test
-popd
-```
-
-# Realisation
-
-Connection to hosts is via tunnels until VNP is configured.
-
-Consul
-```sh
-ssh -v -L 8501:${BOOTSTRAP_INTERNAL_IP}:8501 -i ~/.ssh/mr.t_rsa root@${BASTION_EXTERNAL_IP}
-```
-
-Concourse
-```sh
-ssh -v -L 8080:${BOOTSTRAP_INTERNAL_IP}:8080 -i ~/.ssh/mr.t_rsa root@${BASTION_EXTERNAL_IP}
 ```
 
 # Termination
