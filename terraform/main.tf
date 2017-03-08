@@ -1,5 +1,5 @@
 resource "digitalocean_droplet" "mail" {
-  image = "${var.base_id}"
+  image = "${var.base_snapshot_id}"
   name = "mail"
   region = "${var.region}"
   size = "2gb"

@@ -8,22 +8,22 @@ Ideally the base would come from DigitalOcean, and would not need to build on to
 ```sh
 terraform plan
 terraform apply
-doctl compute droplet-action snapshot $(terraform output ID) --snapshot-name base --wait
+doctl compute droplet-action snapshot $(terraform output ID) --snapshot-name base.rehab.earth --wait
 terraform plan -destroy
 terraform destroy
 ```
 
 Bootstrap is dependent on the Base ID, get image id:
 ```sh
-doctl compute image list|grep base
+doctl compute image list|grep base.rehab.earth
 ```
 
 and add it to relevant exports for your env:
 ```sh
-export TF_VAR_base_id="<<insert_ID_here>>"
+export TF_VAR_base_snapshot_id="<<insert_base_snapshot_ID_here>>"
 ```
 
 When done with base (i.e. when environment is destroyed), clean up.
 ```sh
-doctl compute image delete $TF_VAR_base_id
+doctl compute image delete $TF_VAR_base_snapshot_id
 ```

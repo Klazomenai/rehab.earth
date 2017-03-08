@@ -6,4 +6,4 @@ variable "region" { default = "fra1" }
 variable "size" { default = "2gb" }
 variable "project" {}
 variable "tz" {}
-variable "base_id" {}
+variable "base_snapshot_id" {}

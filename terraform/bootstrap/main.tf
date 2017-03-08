@@ -1,5 +1,5 @@
 resource "digitalocean_droplet" "bootstrap" {
-  image = "${var.base_id}"
+  image = "${var.base_snapshot_id}"
   name = "bootstrap"
   region = "${var.region}"
   size = "${var.size}"
