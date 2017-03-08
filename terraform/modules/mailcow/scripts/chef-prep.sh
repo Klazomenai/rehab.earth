@@ -1,4 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
+
+set -e -o -x errexit
 
 # Until there is a chef-client --local provisioner for terraform, need to do things
 # the bash way.
