@@ -11,6 +11,8 @@ services:
     hostname: vault
     cap_add:
       - IPC_LOCK
+    ports:
+      - "127.0.0.1:8200:8200"
     networks:
       rehab.earth:
         aliases:

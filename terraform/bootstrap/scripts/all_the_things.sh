@@ -6,6 +6,11 @@ set -e -o -x errexit
 # Things must go in Chef!
 
 #
+# Pre reqs
+#
+yum install -y unzip
+
+#
 # Pull off git
 #
 pushd ~
@@ -41,8 +46,8 @@ popd
 # Initialise and unseal the Vault in a way we don't care for at the moment. Keys will be lost!
 # Potential for version drift between binary in Vault container and this
 pushd /tmp/
-curl -L "https://releases.hashicorp.com/vault/0.6.5/vault_0.6.5_linux_amd64.zip" -o /tmp/
-unzip vault*.zip
+curl -s -L "https://releases.hashicorp.com/vault/0.6.5/vault_0.6.5_linux_amd64.zip" -o vault.zip
+unzip vault.zip
 mv vault /usr/local/bin/vault
 chmod u+x /usr/local/bin/vault
 export VAULT_ADDR=http://127.0.0.1:8200
@@ -53,6 +58,7 @@ do
       command = "for i in $(xargs -I {}); do vault unseal $i; done"
       print $4 | command }'
 done
+popd
 
 #
 # Concourse
