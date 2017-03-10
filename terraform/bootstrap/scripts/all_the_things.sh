@@ -55,7 +55,7 @@ vault init -key-shares=5 -key-threshold=3 | while read line
 do
   grep "Unseal Key" | head -n3 |
     awk '{
-      command = "for i in $(xargs -I {}); do vault unseal $i; done"
+      command = "for i in $(xargs); do vault unseal $i; done"
       print $4 | command }'
 done
 popd
