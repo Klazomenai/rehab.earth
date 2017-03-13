@@ -34,6 +34,12 @@ export TF_VAR_pub_key="$HOME/.ssh/${user}.${project}_rsa.pub"
 export TF_VAR_pvt_key="$HOME/.ssh/${user}.${project}_rsa"
 ```
 
+Optional.
+```sh
+# Branch to pull from rehab.earth. Defaults to master
+export TF_VAR_project_branch=""
+```
+
 Running with Terraform v0.8.4.
 ```sh
 pushd terraform
