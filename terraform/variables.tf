@@ -7,3 +7,9 @@ variable "size" { default = "2gb" }
 variable "project" {}
 variable "tz" {}
 variable "base_snapshot_id" {}
+
+variable "project_branch" {
+  description = "Gitlab project branch"
+  type = "string"
+  default = "master"
+}

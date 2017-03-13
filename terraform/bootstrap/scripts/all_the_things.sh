@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e -o -x errexit
+set -e -o -x
 
 # Script called by Terraform to do all the things just like we used to in the 90s.
 # Things must go in Chef!
@@ -11,10 +11,10 @@ set -e -o -x errexit
 yum install -y unzip
 
 #
-# Pull off git
+# Pull off git, take branch as input for Terraform variables
 #
 pushd ~
-git clone --depth 1 https://github.com/Klazomenai/rehab.earth.git
+git clone --depth 1 --branch $1 https://github.com/Klazomenai/rehab.earth.git
 popd
 
 #
