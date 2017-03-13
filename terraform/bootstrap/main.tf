@@ -25,7 +25,7 @@ resource "digitalocean_droplet" "bootstrap" {
   provisioner "remote-exec" {
     inline = [
       # Until chef arrives,
-      "bash all_the_things.sh",
+      "bash all_the_things.sh ${var.project_branch}",
     ]
   }
 }
