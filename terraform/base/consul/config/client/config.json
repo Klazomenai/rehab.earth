@@ -1,0 +1,10 @@
+{
+    "server": false,
+    "datacenter": "DC1",
+    "data_dir": "/var/consul",
+    "ui_dir": "/var/consul/dist",
+    "log_level": "INFO",
+    "enable_syslog": true,
+    "retry_join": ["172.100.0.2", "172.100.0.3", "172.100.0.4"],
+    "advertise_addr": "172.100.0.1"
+}

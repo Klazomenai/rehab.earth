@@ -2,7 +2,7 @@
 version: "2"
 services:
   consul1:
-    command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 0.0.0.0 -bind 0.0.0.0 -server -bootstrap
+    command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 172.100.0.2 -bind 172.100.0.2 -server -bootstrap
     image: consul
     hostname: consul1
     ports:
@@ -11,9 +11,11 @@ services:
       rehab.earth:
         aliases:
           - consul1.rehab.earth
+        # Temporary static IP address until Docker Swarm or similar knows how to resolve consul cluster
+        ipv4_address: 172.100.0.2
 
   consul2:
-    command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 0.0.0.0 -bind 0.0.0.0 -server -rejoin -retry-join=consul1
+    command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 172.100.0.3 -bind 172.100.0.3 -server -rejoin -retry-join=consul1
     image: consul
     hostname: consul2
     depends_on:
@@ -24,9 +26,11 @@ services:
       rehab.earth:
         aliases:
           - consul2.rehab.earth
+        # Temporary static IP address until Docker Swarm or similar knows how to resolve consul cluster
+        ipv4_address: 172.100.0.3
 
   consul3:
-    command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 0.0.0.0 -bind 0.0.0.0 -server -rejoin -retry-join=consul1
+    command: consul agent -data-dir=/consul/data -config-dir=/consul/config -dev -client 172.100.0.4 -bind 172.100.0.4 -server -rejoin -retry-join=consul1
     image: consul
     hostname: consul3
     depends_on:
@@ -37,6 +41,8 @@ services:
       rehab.earth:
         aliases:
           - consul3.rehab.earth
+        # Temporary static IP address until Docker Swarm or similar knows how to resolve consul cluster
+        ipv4_address: 172.100.0.4
 
 networks:
   rehab.earth:

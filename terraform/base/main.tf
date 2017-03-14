@@ -16,6 +16,21 @@ resource "digitalocean_droplet" "base" {
     timeout = "2m"
   }
 
+  provisioner "file" {
+    source = "consul/config/client/config.json"
+    destination = "/tmp/consul_client_config.json"
+  }
+
+  provisioner "file" {
+    source = "consul/systemd/consul.service"
+    destination = "/etc/systemd/system/consul.service"
+  }
+
+  provisioner "file" {
+    source = "scripts/all_the_things.sh"
+    destination = "/root/all_the_things.sh"
+  }
+
   # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [
@@ -28,6 +43,8 @@ resource "digitalocean_droplet" "base" {
       "uname -r",
       # or possibly update-grub
       "grub2-set-default 0",
+      # Until chef arrives,
+      "bash all_the_things.sh",
     ]
   }
 }
