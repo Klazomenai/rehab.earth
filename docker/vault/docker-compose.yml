@@ -17,6 +17,8 @@ services:
       rehab.earth:
         aliases:
           - vault.rehab.earth
+        # Temporary static IP address until Docker Swarm or similar knows how to resolve consul cluster
+        ipv4_address: 172.100.0.5
 
 networks:
   rehab.earth:
