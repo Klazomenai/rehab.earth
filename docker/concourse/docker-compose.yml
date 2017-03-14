@@ -8,6 +8,12 @@ services:
       POSTGRES_USER: concourse
       POSTGRES_PASSWORD: changeme
       PGDATA: /database
+    networks:
+      rehab.earth:
+        aliases:
+          - concourse-db.rehab.earth
+        # Temporary static IP address until Docker Swarm or similar knows how to resolve consul cluster
+        ipv4_address: 172.100.0.6
 
   concourse-web:
     image: klazomenai/concourse-linux-generic-lts-wily
@@ -21,6 +27,12 @@ services:
       CONCOURSE_EXTERNAL_URL: "${CONCOURSE_EXTERNAL_URL}"
       CONCOURSE_POSTGRES_DATA_SOURCE: |-
         postgres://concourse:changeme@concourse-db:5432/concourse?sslmode=disable
+    networks:
+      rehab.earth:
+        aliases:
+          - concourse-web.rehab.earth
+        # Temporary static IP address until Docker Swarm or similar knows how to resolve consul cluster
+        ipv4_address: 172.100.0.7
 
   concourse-worker:
     image: klazomenai/concourse-linux-generic-lts-wily
@@ -31,3 +43,14 @@ services:
     environment:
       CONCOURSE_TSA_HOST: concourse-web
       CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
+    networks:
+      rehab.earth:
+        aliases:
+          - concourse-worker.rehab.earth
+        # Temporary static IP address until Docker Swarm or similar knows how to resolve consul cluster
+        ipv4_address: 172.100.0.8
+
+networks:
+  rehab.earth:
+    external:
+      name: rehab.earth

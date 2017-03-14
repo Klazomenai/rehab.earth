@@ -46,7 +46,7 @@ curl -s -L "https://releases.hashicorp.com/vault/0.6.5/vault_0.6.5_linux_amd64.z
 unzip vault.zip
 mv vault /usr/local/bin/vault
 chmod u+x /usr/local/bin/vault
-export VAULT_ADDR=http://127.0.0.1:8200
+export VAULT_ADDR=http://172.100.0.5:8200
 vault init -key-shares=5 -key-threshold=3 | while read line
 do
   grep "Unseal Key" | head -n3 |
