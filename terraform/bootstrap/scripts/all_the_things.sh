@@ -1,13 +1,4 @@
 #!/usr/bin/env bash
-<<<<<<< HEAD
-
-set -e -o -x
-
-# Script called by Terraform to do all the things just like we used to in the 90s.
-# Things must go in Chef!
-
-=======
->>>>>>> 01cc606... Adding consul to base and registring bootstrap node to consul cluster
 #
 # Script called by Terraform to do all the things (for Bootstrapping)
 # just like we used to in the 90s. Things must go in Chef!
