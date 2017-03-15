@@ -6,6 +6,8 @@
 
 set -e -o -x
 
+DIGITALOCEAN_ACCESS_TOKEN=$2
+
 #
 # Pull off git, take branch as input for Terraform variables
 #
@@ -46,7 +48,12 @@ unzip vault.zip
 mv vault /usr/local/bin/vault
 popd
 chmod u+x /usr/local/bin/vault
+# Unseal and export root token
 sh /root/export_root_token.sh
+# Save DigitalOcean tokens into the vault
+vault write secret/digitalocean DIGITALOCEAN_ACCESS_TOKEN=$DIGITALOCEAN_ACCESS_TOKEN
+echo "export DIGITALOCEAN_ACCESS_TOKEN=$(vault read --field=DIGITALOCEAN_ACCESS_TOKEN secret/digitalocean)" >> ~/.bashrc
+source ~/.bashrc
 
 #
 # Concourse
