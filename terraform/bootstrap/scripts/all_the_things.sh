@@ -51,6 +51,8 @@ chmod u+x /usr/local/bin/vault
 # Unseal and export root token
 sh /root/export_root_token.sh
 # Save DigitalOcean tokens into the vault
+# Looks like Vault needs time to wake
+sleep 10
 vault write secret/digitalocean DIGITALOCEAN_ACCESS_TOKEN=$DIGITALOCEAN_ACCESS_TOKEN
 echo "export DIGITALOCEAN_ACCESS_TOKEN=$(vault read --field=DIGITALOCEAN_ACCESS_TOKEN secret/digitalocean)" >> ~/.bashrc
 source ~/.bashrc
