@@ -16,7 +16,7 @@ services:
         ipv4_address: 172.100.0.6
 
   concourse-web:
-    image: klazomenai/concourse-linux-generic-lts-wily
+    image: klazomenai/concourse.rehab.earth
     links: [concourse-db]
     command: web
     ports: ["8080:8080"]
@@ -35,7 +35,7 @@ services:
         ipv4_address: 172.100.0.7
 
   concourse-worker:
-    image: klazomenai/concourse-linux-generic-lts-wily
+    image: klazomenai/concourse.rehab.earth
     privileged: true
     links: [concourse-web]
     command: worker
