@@ -23,6 +23,6 @@ do
       print $4 | command }'
 done
 
-initial_root_token=$(echo $vault_init | grep "Initial Root Token")
+initial_root_token=$(echo $vault_init | grep "Initial Root Token" | awk '{print $4}' )
 
 echo "export VAULT_TOKEN=$initial_root_token" >> ~/.bashrc
