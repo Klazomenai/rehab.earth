@@ -21,6 +21,11 @@ resource "digitalocean_droplet" "bootstrap" {
     destination = "/root/all_the_things.sh"
   }
 
+  provisioner "file" {
+    source = "scripts/export_root_token.sh"
+    destination = "/root/export_root_token.sh"
+  }
+
   # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [
