@@ -50,6 +50,7 @@ popd
 chmod u+x /usr/local/bin/vault
 # Unseal and export root token
 sh /root/export_root_token.sh
+source ~/.bashrc
 # Save DigitalOcean tokens into the vault
 # Looks like Vault needs time to wake
 sleep 10
