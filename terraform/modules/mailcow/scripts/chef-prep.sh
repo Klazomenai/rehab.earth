@@ -2,6 +2,8 @@
 
 set -e -o -x errexit
 
+PROJECT_BRANCH=$1
+
 # Until there is a chef-client --local provisioner for terraform, need to do things
 # the bash way.
 
@@ -22,7 +24,10 @@ gem install bundler
 
 # Chef + Dependencies
 curl -L https://omnitruck.chef.io/install.sh | sudo bash
-cd && git clone https://github.com/Klazomenai/rehab.earth.git
-cd ~/rehab.earth
+pushd ~
+git clone --depth 1 --branch $PROJECT_BRANCH https://github.com/Klazomenai/rehab.earth.git
+pushd ~/rehab.earth
 bundle install
 berks vendor cookbooks/
+popd
+popd

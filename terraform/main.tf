@@ -24,7 +24,7 @@ resource "digitalocean_droplet" "mail" {
   provisioner "remote-exec" {
     inline = [
       "chmod +x /tmp/chef-prep.sh",
-      "/tmp/chef-prep.sh"
+      "/tmp/chef-prep.sh ${var.project_branch}"
     ]
   }
 
