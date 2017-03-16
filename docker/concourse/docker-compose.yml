@@ -43,6 +43,8 @@ services:
     environment:
       CONCOURSE_TSA_HOST: concourse-web
       CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
+      VAULT_ADDR: "{VAULT_ADDR}"
+      VAULT_TOKEN: "${VAULT_TOKEN}"
     networks:
       rehab.earth:
         aliases:
