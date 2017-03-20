@@ -11,7 +11,6 @@ RUN apt-get install -y --install-recommends linux-generic-lts-wily
 
 # Because everything needs to know about secrets. Need to sort out latest!
 ADD http://releases.hashicorp.com/vault/0.6.5/vault_0.6.5_linux_amd64.zip /tmp/
-RUN apt-get install -y unzip
 RUN unzip /tmp/vault_0.6.5_linux_amd64.zip -d /usr/local/bin/
 RUN chmod u+x /usr/local/bin/vault
 
