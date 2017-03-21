@@ -27,6 +27,7 @@ docker network create rehab.earth --ip-range=172.100.0.0/24 --gateway=172.100.0.
 # Consul
 #
 pushd ~/rehab.earth/docker/consul
+docker build -t klazomenai/concourse.rehab.earth:latest .
 docker-compose up -d
 popd
 # Give consul a bit of time to wake, better poll could be used here
