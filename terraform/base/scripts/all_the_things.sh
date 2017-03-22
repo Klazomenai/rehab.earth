@@ -25,3 +25,14 @@ unzip consul_0.7.5_linux_amd64.zip
 mv consul /usr/local/bin/
 chmod u+x /usr/local/bin/consul
 systemctl enable consul
+popd
+
+#
+# Consul Template
+#
+pushd /tmp
+curl -L "https://releases.hashicorp.com/consul-template/0.18.1/consul-template_0.18.1_linux_amd64.zip" -o /tmp/consul-template_0.18.1_linux_amd64.zip
+unzip consul-template_0.18.1_linux_amd64.zip
+mv consul-template /usr/local/bin/
+chmod u+x /usr/local/bin/consul-template
+popd
