@@ -19,7 +19,7 @@ services:
     image: klazomenai/concourse.rehab.earth
     links: [concourse-db]
     command: web
-    ports: ["8080:8080"]
+    ports: ["127.0.0.1:8080:8080"]
     volumes: ["./keys/web:/concourse-keys"]
     environment:
       CONCOURSE_BASIC_AUTH_USERNAME: concourse
