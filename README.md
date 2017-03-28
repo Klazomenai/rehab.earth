@@ -1,9 +1,15 @@
 # Abstraction
 
-Sandpit for CI\alpha.
-\begin{equation}
-\sum_(DigitalOcean+Docker)^\infty \frac{Terraform + Chef + Inspec}{Consul + Vault} \to Concourse \equiv MailCow
-\end{equation}
+Sandpit for CD:
+((DigitalOcean + Docker) + (Terraform + Chef + Inspec) + (Consul + Vault)) + Concourse = MailCow
+
+The intention is to have a basic opinionated framework for Docker Containers on DigitalOcean. Bootstrap
+can be considered as ground zero (basic infra able to fire Concourse). Concourse is then the gateway to
+all new creations (Containers) and the new world. We're using the MailCow stack of Docker containers to
+attach some value and purpose to the infrastructure. Consul keeps the relevant config and Vault the
+secrets, with consul-template plumbing in the relevant bits in the correct place.
+
+Still desperately missing. Docker Swarm Vs Nomad and a descent testing structure.
 
 # Tests
 
