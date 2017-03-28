@@ -17,12 +17,12 @@ resource "digitalocean_droplet" "base" {
   }
 
   provisioner "file" {
-    source = "consul/config/client/config.json"
+    source = "../../scripts/etc/consul.d/client/config.json"
     destination = "/tmp/consul_client_config.json"
   }
 
   provisioner "file" {
-    source = "consul/systemd/consul.service"
+    source = "../../scripts/etc/systemd/consul.service"
     destination = "/etc/systemd/system/consul.service"
   }
 

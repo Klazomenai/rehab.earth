@@ -36,13 +36,15 @@ services:
 
   concourse-worker:
     image: klazomenai/concourse.rehab.earth
+    build: ./
     privileged: true
     links: [concourse-web]
-    command: worker
+    entrypoint: ["/usr/bin/supervisord"]
     volumes: ["./keys/worker:/concourse-keys"]
     environment:
       CONCOURSE_TSA_HOST: concourse-web
       CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
+      PROJECT_BRANCH: "${TF_VAR_project_branch}"
     networks:
       rehab.earth:
         aliases:
