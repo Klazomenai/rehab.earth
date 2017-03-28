@@ -52,13 +52,6 @@ terraform apply
 popd
 ```
 
-## Useful Key/Value Data
-
-- The `Environment Branch` which has was used to build the bootstrap environment.
-```sh
-consul kv get env/bootstrap/branch
-```
-
 # Termination
 
 ```sh
