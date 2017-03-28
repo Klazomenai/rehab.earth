@@ -35,7 +35,7 @@ pushd ~/rehab.earth/docker/consul
 docker-compose up -d
 popd
 # Give consul a bit of time to wake, better poll could be used here
-sleep 20
+sleep 30
 # Load some useful things into Consul KV Store
 consul kv put env/bootstrap/branch $PROJECT_BRANCH
 
