@@ -11,6 +11,8 @@ secrets, with consul-template plumbing in the relevant bits in the correct place
 
 Still desperately missing. Docker Swarm Vs Nomad and a descent testing structure.
 
+If you fancy getting stuck in with the development, come join the [community](http://project-entropy.com/pages/community)
+
 # Tests
 
 ```sh
