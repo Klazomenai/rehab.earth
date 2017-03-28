@@ -1,8 +1,9 @@
 # Abstraction
 
 Sandpit for CI\alpha.
-
-![equation]\sum_(DigitalOcean+Docker)^\infty \frac{Terraform + Chef + Inspec}{Consul + Vault} \to Concourse \equiv MailCow
+\begin{equation}
+\sum_(DigitalOcean+Docker)^\infty \frac{Terraform + Chef + Inspec}{Consul + Vault} \to Concourse \equiv MailCow
+\end{equation}
 
 # Tests
 
