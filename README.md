@@ -1,10 +1,8 @@
 # Abstraction
 
-Sandpit for spinning up a basic MailCow instance.
+Sandpit for CI\alpha.
 
-The current stack: DigitalOcean, Terraform, Docker, Chef, Inspec.
-
-Coming: Consul, Vault, Concourse.
+\sum_(DigitalOcean+Docker)^\infty \frac{Terraform + Chef + Inspec}{Consul + Vault} \to Concourse \equiv MailCow
 
 # Tests
 
