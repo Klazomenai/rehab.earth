@@ -10,7 +10,6 @@ set -e -o -x
 # Env definitions
 #
 PROJECT_BRANCH=$1
-consul kv put env/bootstrap/branch $PROJECT_BRANCH
 
 #
 # Pull off git, take branch as input for Terraform variables
@@ -37,6 +36,8 @@ docker-compose up -d
 popd
 # Give consul a bit of time to wake, better poll could be used here
 sleep 10
+# Load some useful things into Consul KV Store
+consul kv put env/bootstrap/branch $PROJECT_BRANCH
 
 #
 # Vault
