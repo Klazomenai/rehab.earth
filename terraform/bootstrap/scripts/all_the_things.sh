@@ -73,6 +73,8 @@ mv fly /usr/local/bin/fly
 chmod u+x /usr/local/bin/fly
 # Looks like concourse needs a little sleep before it wakes up, this sleep needs sorting properly
 sleep 20
+# Generate the Concourse pipeline yml from the Consul template
+consul-template -consul-addr 172.100.0.2:8500 -template ~/rehab.earth/ci/pipeline.yml.cmtpl:~/rehab.earth/ci/pipeline.out -once -vault-renew-token=false
 # The start of the beginning and the end of bootstrap
 # Starting to really need Vault!
 fly --target lite login --concourse-url http://bootstrap:8080 --username=concourse --password=changeme
