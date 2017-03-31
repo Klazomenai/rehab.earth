@@ -36,7 +36,6 @@ services:
 
   concourse-worker:
     image: klazomenai/concourse.rehab.earth
-    build: ./
     privileged: true
     links: [concourse-web]
     volumes: ["./keys/worker:/concourse-keys"]
