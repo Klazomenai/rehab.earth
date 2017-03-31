@@ -39,7 +39,6 @@ services:
     build: ./
     privileged: true
     links: [concourse-web]
-    entrypoint: ["/usr/bin/supervisord"]
     volumes: ["./keys/worker:/concourse-keys"]
     environment:
       CONCOURSE_TSA_HOST: concourse-web

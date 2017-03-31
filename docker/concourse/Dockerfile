@@ -10,7 +10,7 @@ LABEL com.docker.compose.project=concourse
 # Pre-requisites
 #
 RUN apt-get update
-RUN apt-get install -y unzip supervisor git
+RUN apt-get install -y unzip git
 
 #
 # Prepping project cone init script. This should be done by Chef.
