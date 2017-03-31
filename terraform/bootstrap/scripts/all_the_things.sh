@@ -35,7 +35,7 @@ pushd ~/rehab.earth/docker/consul
 docker-compose up -d
 popd
 # Give consul a bit of time to wake, better poll could be used here
-sleep 15
+sleep 30
 # Load some useful things into Consul KV Store
 consul kv put env/bootstrap/branch $PROJECT_BRANCH
 
@@ -74,6 +74,10 @@ mv fly /usr/local/bin/fly
 chmod u+x /usr/local/bin/fly
 # Looks like concourse needs a little sleep before it wakes up, this sleep needs sorting properly
 sleep 20
+# Generate the Concourse pipeline yml from the Consul template
+pushd ~/rehab.earth/ci
+consul-template -consul-addr 172.100.0.2:8500 -template pipeline.yml.cmtpl:pipeline.yml -once -vault-renew-token=false
+popd
 # The start of the beginning and the end of bootstrap
 # Starting to really need Vault!
 fly --target lite login --concourse-url http://bootstrap:8080 --username=concourse --password=changeme

@@ -3,6 +3,7 @@ resources:
   type: git
   source:
     uri: https://github.com/Klazomenai/rehab.earth.git
+    branch: {{key "env/bootstrap/branch"}}
 
 jobs:
 - name: master-rehab-earth
