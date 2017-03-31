@@ -38,6 +38,7 @@ services:
     image: klazomenai/concourse.rehab.earth
     privileged: true
     links: [concourse-web]
+    command: worker
     volumes: ["./keys/worker:/concourse-keys"]
     environment:
       CONCOURSE_TSA_HOST: concourse-web
