@@ -31,10 +31,10 @@ Connection to hosts is via tunnels until VNP is configured.
 
 Consul
 ```sh
-ssh -v -L 8501:${BOOTSTRAP_INTERNAL_IP}:8501 -i ~/.ssh/mr.t_rsa root@${BASTION_EXTERNAL_IP}
+ssh -L 8501:localhost:8501 -i $TF_VAR_pvt_key root@$(terraform output Public_IP)
 ```
 
 Concourse
 ```sh
-ssh -v -L 8080:${BOOTSTRAP_INTERNAL_IP}:8080 -i ~/.ssh/mr.t_rsa root@${BASTION_EXTERNAL_IP}
+ssh -L 8080:localhost:8080 -i $TF_VAR_pvt_key root@$(terraform output Public_IP)
 ```
