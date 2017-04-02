@@ -4,12 +4,14 @@
 # just like we used to in the 90s. Things must go in Chef!
 #
 
-set -e -o -x
+set -e -o
 
 #
 # Env definitions
 #
 PROJECT_BRANCH=$1
+PROJECT=$2
+DO_PAT=$3
 
 #
 # Pull off git, take branch as input for Terraform variables
@@ -53,7 +55,7 @@ unzip vault.zip
 mv vault /usr/local/bin/vault
 popd
 chmod u+x /usr/local/bin/vault
-sh /root/export_root_token.sh
+sh /root/export_root_token.sh $PROJECT $DO_PAT
 
 #
 # Concourse

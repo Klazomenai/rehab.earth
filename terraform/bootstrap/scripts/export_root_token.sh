@@ -8,6 +8,9 @@
 
 IFS=!
 
+PROJECT=$1
+DO_PAT=$2
+
 # Temporary static IP address until Docker Swarm or similar knows
 # how to resolve consul cluster. See Vault Docker Compose file.
 echo "export VAULT_ADDR=http://172.100.0.5:8200" >> ~/.bashrc
@@ -26,3 +29,9 @@ done
 initial_root_token=$(echo $vault_init | grep "Initial Root Token" | awk '{print $4}' )
 
 echo "export VAULT_TOKEN=$initial_root_token" >> ~/.bashrc
+source ~/.bashrc
+
+# Load the main DigitalOcean token into Vault so Concourse can build
+# things. These should NOT be visible in any verbose output as Concourse
+# will display to the world
+vault write secret/$PROJECT DO_PAT=$DO_PAT
