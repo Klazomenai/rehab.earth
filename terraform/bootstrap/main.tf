@@ -26,6 +26,11 @@ resource "digitalocean_droplet" "bootstrap" {
     destination = "/root/export_root_token.sh"
   }
 
+  provisioner "file" {
+    source = "${file("${var.pvt_key}")}"
+    destination = "/root/DO_SSH_KEY"
+  }
+
   # Set up chef. No chef-client --local provisioner yet
   provisioner "remote-exec" {
     inline = [

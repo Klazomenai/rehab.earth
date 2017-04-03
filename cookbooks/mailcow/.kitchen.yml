@@ -6,7 +6,7 @@ driver:
   image: centos-7-x64
   digitalocean_access_token: <%= ENV['DO_PAT'] %>
   ssh_key_ids: <%= ENV['DO_SSH_KEY_IDS'] %>
-  ssh_key: <%= ENV['TF_VAR_pvt_key'] %>
+  ssh_key: <%= ENV['DO_SSH_KEY'] %>
 
 provisioner:
   name: chef_zero

@@ -24,4 +24,7 @@ jobs:
         path: scripts/run_tests.sh
     params:{{ with secret "secret/digitalocean" }}
       DO_PAT: {{ .Data.DO_PAT }}
-      DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}{{ end }}
+      DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}
+      DO_SSH_KEY: |
+        {{ .Data.DO_SSH_KEY}}
+      {{ end }}

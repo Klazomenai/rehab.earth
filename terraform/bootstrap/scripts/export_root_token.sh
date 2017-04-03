@@ -35,4 +35,4 @@ source ~/.bashrc
 # Load the main DigitalOcean token into Vault so Concourse can build
 # things. These should NOT be visible in any verbose output as Concourse
 # will display to the world
-vault write secret/digitalocean DO_PAT=$DO_PAT DO_SSH_KEY_IDS=$DO_SSH_KEY_IDS
+cat /root/DO_SSH_KEY | vault write secret/digitalocean DO_PAT=$DO_PAT DO_SSH_KEY_IDS=$DO_SSH_KEY_IDS DO_SSH_KEY=-
