@@ -27,7 +27,7 @@ resource "digitalocean_droplet" "bootstrap" {
   }
 
   provisioner "file" {
-    source = "${file("${var.pvt_key}")}"
+    source = "${var.pvt_key}"
     destination = "/root/DO_SSH_KEY"
   }
 
