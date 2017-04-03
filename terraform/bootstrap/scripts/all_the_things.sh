@@ -59,6 +59,7 @@ mv vault /usr/local/bin/vault
 popd
 chmod u+x /usr/local/bin/vault
 sh /root/export_root_token.sh $PROJECT $DO_PAT
+source ~/.bashrc
 
 #
 # Concourse
