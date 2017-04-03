@@ -35,3 +35,7 @@ source ~/.bashrc
 # things. These should NOT be visible in any verbose output as Concourse
 # will display to the world
 vault write secret/$PROJECT DO_PAT=$DO_PAT
+# Export the token as an env var so Concourse worker can use it. Not the
+# most optimal way, the worker should be Vault aware and be able to call
+# Vault itself for the token.
+echo "export DO_PAT=$(vault read secret/$PROJECT DO_PAT)" >> ~/.bashrc

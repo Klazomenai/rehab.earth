@@ -43,7 +43,12 @@ services:
     environment:
       CONCOURSE_TSA_HOST: concourse-web
       CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8
+      # The branch is required so we can build off other things than just master. The worker should
+      # really be capable to call Concourse on its own and not depend on this.
       PROJECT_BRANCH: "${TF_VAR_project_branch}"
+      # Required to be able to build things through DigitalOcean. The worker should ideally be Vault
+      # aware and be able to query the token itself. This method is not great and has limitations.
+      DO_PAT: "${DO_PAT}"
     networks:
       rehab.earth:
         aliases:
