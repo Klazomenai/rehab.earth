@@ -23,4 +23,4 @@ jobs:
         dir: resource-rehab-earth
         path: scripts/run_tests.sh
     params:{{ with secret "secret/digitalocean" }}
-      DO_PAT = {{ .Data.DO_PAT }}{{ end }}
+      DO_PAT: {{ .Data.DO_PAT }}{{ end }}

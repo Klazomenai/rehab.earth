@@ -2,10 +2,7 @@
 
 set -e -o errexit
 
-# Testing sending do_pat to tasks
-env
-
-#pushd cookbooks/mailcow
-#bundle install
-#bundle exec kitchen test
-#popd
+pushd cookbooks/mailcow
+bundle install
+bundle exec kitchen test
+popd
