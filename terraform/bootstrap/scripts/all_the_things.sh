@@ -12,6 +12,7 @@ set -e -o
 PROJECT_BRANCH=$1
 PROJECT=$2
 DO_PAT=$3
+DO_SSH_KEY_IDS=$4
 
 #
 # Pull off git, take branch as input for Terraform variables
@@ -58,7 +59,7 @@ unzip vault.zip
 mv vault /usr/local/bin/vault
 popd
 chmod u+x /usr/local/bin/vault
-sh /root/export_root_token.sh $PROJECT $DO_PAT
+sh /root/export_root_token.sh $PROJECT $DO_PAT $DO_SSH_KEY_IDS
 source ~/.bashrc
 
 #

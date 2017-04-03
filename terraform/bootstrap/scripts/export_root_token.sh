@@ -10,6 +10,7 @@ IFS=!
 
 PROJECT=$1
 DO_PAT=$2
+DO_SSH_KEY_IDS=$3
 
 # Temporary static IP address until Docker Swarm or similar knows
 # how to resolve consul cluster. See Vault Docker Compose file.
@@ -35,7 +36,4 @@ source ~/.bashrc
 # things. These should NOT be visible in any verbose output as Concourse
 # will display to the world
 vault write secret/digitalocean DO_PAT=$DO_PAT
-# Export the token as an env var so Concourse worker can use it. Not the
-# most optimal way, the worker should be Vault aware and be able to call
-# Vault itself for the token.
-echo 'export DO_PAT=$(vault read -field=DO_PAT secret/digitalocean)' >> ~/.bashrc
+vault write secret/digitalocean DO_SSH_KEY_IDS=$DO_SSH_KEY_IDS

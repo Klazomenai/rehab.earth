@@ -5,7 +5,7 @@ driver:
   region: lon1
   image: centos-7-x64
   digitalocean_access_token: <%= ENV['DO_PAT'] %>
-  ssh_key_ids: <%= ENV['TF_VAR_ssh_fingerprint'] %>
+  ssh_key_ids: <%= ENV['DO_SSH_KEY_IDS'] %>
   ssh_key: <%= ENV['TF_VAR_pvt_key'] %>
 
 provisioner:
