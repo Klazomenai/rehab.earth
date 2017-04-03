@@ -22,3 +22,5 @@ jobs:
       run:
         dir: resource-rehab-earth
         path: scripts/run_tests.sh
+    params:
+      DO_PAT = {{DO_PAT}}

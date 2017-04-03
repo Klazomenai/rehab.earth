@@ -1,13 +1,11 @@
 #!/usr/bin/env bash
 
-set -e -o -x errexit
+set -e -o errexit
 
-# Determine who what why where
-echo "Running on host: " `hostname`
-ip a
-whoami
+# Testing sending do_pat to tasks
+env
 
-pushd cookbooks/mailcow
-bundle install
-bundle exec kitchen test
-popd
+#pushd cookbooks/mailcow
+#bundle install
+#bundle exec kitchen test
+#popd
