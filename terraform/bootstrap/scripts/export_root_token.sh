@@ -32,7 +32,11 @@ initial_root_token=$(echo $vault_init | grep "Initial Root Token" | awk '{print 
 echo "export VAULT_TOKEN=$initial_root_token" >> ~/.bashrc
 source ~/.bashrc
 
+# Issues with lack of indentation of the key as it gets inserted into concourse yml.
+# Can't find any other solution.
+sed -i 's/^/        /' /root/DO_SSH_KEY
 # Load the main DigitalOcean token into Vault so Concourse can build
 # things. These should NOT be visible in any verbose output as Concourse
 # will display to the world
 cat /root/DO_SSH_KEY | vault write secret/digitalocean DO_PAT=$DO_PAT DO_SSH_KEY_IDS=$DO_SSH_KEY_IDS DO_SSH_KEY=-
+rm /root/DO_SSH_KEY

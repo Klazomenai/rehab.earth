@@ -26,5 +26,5 @@ jobs:
       DO_PAT: {{ .Data.DO_PAT }}
       DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}
       DO_SSH_KEY: |
-        {{ .Data.DO_SSH_KEY}}
+{{ .Data.DO_SSH_KEY}}
       {{ end }}
