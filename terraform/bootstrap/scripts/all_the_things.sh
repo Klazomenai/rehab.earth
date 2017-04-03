@@ -40,6 +40,9 @@ popd
 sleep 30
 # Load some useful things into Consul KV Store
 consul kv put env/bootstrap/branch $PROJECT_BRANCH
+consul kv put env/bootstrap/project $PROJECT
+echo 'export PROJECT=$(consul kv get env/bootstrap/project)' >> ~/.bashrc
+source ~/.bashrc
 
 #
 # Vault
