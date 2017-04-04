@@ -6,7 +6,7 @@ pushd cookbooks/mailcow
 bundle install
 
 # Adding temporary debug diagnostics.
-kitchen diagnose --all
+kitchen diagnose --no-instances --loader
 
 bundle exec kitchen test
 popd
