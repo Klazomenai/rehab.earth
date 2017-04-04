@@ -1,15 +1,15 @@
 resources:
-- name: resource-rehab-earth
+- name: rehab.earth
   type: git
   source:
     uri: https://github.com/Klazomenai/rehab.earth.git
     branch: {{key "env/bootstrap/branch"}}
 
 jobs:
-- name: master-rehab-earth
+- name: mailcow
   plan:
   - get: resource-rehab-earth
-  - task: env-config
+  - task: run-tests
     config:
       platform: linux
       image_resource:
@@ -17,16 +17,6 @@ jobs:
         source:
           repository: klazomenai/concourse.rehab.earth
           tag: latest
-      run:
-        path: sh
-        args:
-        - -exc
-        - |
-          echo "Hostname:" `hostname`
-          ls /usr/local/bin/vault
-
-  - task: run-tests
-    config:
       inputs:
         - name: resource-rehab-earth
       run:
