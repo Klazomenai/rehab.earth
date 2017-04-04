@@ -8,7 +8,7 @@ resources:
 jobs:
 - name: mailcow
   plan:
-  - get: resource-rehab-earth
+  - get: rehab.earth
   - task: run-tests
     config:
       platform: linux
@@ -18,7 +18,7 @@ jobs:
           repository: klazomenai/concourse.rehab.earth
           tag: latest
       inputs:
-        - name: resource-rehab-earth
+        - name: rehab.earth
       run:
         dir: resource-rehab-earth
         path: scripts/run_tests.sh
