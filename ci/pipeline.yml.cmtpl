@@ -9,14 +9,24 @@ jobs:
 - name: master-rehab-earth
   plan:
   - get: resource-rehab-earth
-  - task: tests
+  - task: env-config
     config:
       platform: linux
       image_resource:
         type: docker-image
         source:
-          repository: ruby
-          tag: 2.2.6
+          repository: klazomenai/concourse.rehab.earth
+          tag: latest
+      run:
+        path: sh
+        args:
+        - -exc
+        - |
+          echo "Hostname:" `hostname`
+          ls /usr/local/bin/vault
+
+  - task: run-tests
+    config:
       inputs:
         - name: resource-rehab-earth
       run:
