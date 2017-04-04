@@ -2,13 +2,13 @@
 
 set -e -o errexit
 
-echo "Hostname:" `hostname`
+/usr/local/bin/vault
 
-pushd cookbooks/mailcow
-bundle install
+#pushd cookbooks/mailcow
+#bundle install
 
 # Adding temporary debug diagnostics.
-kitchen diagnose --no-instances --loader
+#kitchen diagnose --no-instances --loader
 
 #bundle exec kitchen test
 popd
