@@ -39,7 +39,9 @@ services:
     privileged: true
     links: [concourse-web]
     command: worker
-    volumes: ["./keys/worker:/concourse-keys"]
+    volumes:
+      - ./keys/worker:/concourse-keys
+      - /tmp/worker-state:/worker-state
     environment:
       CONCOURSE_TSA_HOST: concourse-web
       CONCOURSE_GARDEN_DNS_SERVER: 8.8.8.8

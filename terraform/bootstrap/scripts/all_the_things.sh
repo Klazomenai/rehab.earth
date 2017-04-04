@@ -15,6 +15,11 @@ DO_PAT=$3
 DO_SSH_KEY_IDS=$4
 
 #
+# Temporary test for mounting external volume for Concourse
+#
+mkdir /tmp/worker-state
+
+#
 # Pull off git, take branch as input for Terraform variables
 #
 pushd ~
