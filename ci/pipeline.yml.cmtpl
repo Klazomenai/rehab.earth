@@ -26,10 +26,9 @@ jobs:
         - -exc
         - |
           vault read -field=DO_SSH_KEY secret/digitalocean > ~/DO_SSH_KEY
-          pushd cookbooks/mailcow
+          cd cookbooks/mailcow
           bundle install
           bundle exec kitchen test
-          popd
           rm ~/DO_SSH_KEY
     params:{{ with secret "secret/digitalocean" }}
       DO_PAT: {{ .Data.DO_PAT }}
