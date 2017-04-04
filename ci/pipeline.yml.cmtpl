@@ -21,10 +21,20 @@ jobs:
         - name: rehab.earth
       run:
         dir: rehab.earth
-        path: scripts/run_tests.sh
+        path: sh
+        args:
+        - -exc
+        - |
+          vault read -field=DO_SSH_KEY secret/digitalocean > ~/DO_SSH_KEY
+          pushd cookbooks/mailcow
+          bundle install
+          bundle exec kitchen test
+          popd
+          rm ~/DO_SSH_KEY
     params:{{ with secret "secret/digitalocean" }}
       DO_PAT: {{ .Data.DO_PAT }}
-      DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}
-      DO_SSH_KEY: |
-{{ .Data.DO_SSH_KEY}}
-      {{ end }}
+      DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}{{ end }}
+      DO_SSH_KEY: ~/DO_SSH_KEY
+      {{ with secret "secret/vault" }}
+      VAULT_ADDR: {{ .Data.VAULT_ADDR }}
+      VAULT_TOKEN: {{ .Data.VAULT_TOKEN }}{{ end }}
