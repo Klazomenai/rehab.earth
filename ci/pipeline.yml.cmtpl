@@ -15,8 +15,8 @@ jobs:
       image_resource:
         type: docker-image
         source:
-          repository: klazomenai/concourse.rehab.earth
-          tag: latest
+          repository: klazomenai/ruby.rehab.earth
+          tag: 2.2.6
       inputs:
         - name: rehab.earth
       run:
