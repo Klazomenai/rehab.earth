@@ -6,3 +6,6 @@ LABEL com.docker.compose.project=ruby
 
 ADD vault /usr/local/bin/
 RUN chmod u+x /usr/local/bin/vault
+
+ADD terraform /usr/local/bin/
+RUN chmod u+x /usr/local/bin/terraform
