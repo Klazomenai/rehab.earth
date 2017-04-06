@@ -6,9 +6,10 @@ resources:
     branch: {{key "env/bootstrap/branch"}}
 
 jobs:
-- name: mailcow
+- name: deploy-mailcow
   plan:
   - get: rehab.earth
+    trigger: true
   - task: run-tests
     config:
       platform: linux
@@ -30,6 +31,22 @@ jobs:
           bundle install
           bundle exec kitchen test
           rm ~/DO_SSH_KEY
+  - task: deploy
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: klazomenai/ruby.rehab.earth
+          tag: 2.2.6
+      inputs:
+        - name: rehab.earth
+      run:
+        dir: rehab.earth
+        path: sh
+        args:
+        - -exc
+        - |
     params:{{ with secret "secret/digitalocean" }}
       DO_PAT: {{ .Data.DO_PAT }}
       DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}{{ end }}
