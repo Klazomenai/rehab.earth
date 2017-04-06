@@ -31,6 +31,13 @@ jobs:
           bundle install
           bundle exec kitchen test
           rm ~/DO_SSH_KEY
+    params:{{ with secret "secret/digitalocean" }}
+      DO_PAT: {{ .Data.DO_PAT }}
+      DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}{{ end }}
+      DO_SSH_KEY: ~/DO_SSH_KEY
+      {{ with secret "secret/vault" }}
+      VAULT_ADDR: {{ .Data.VAULT_ADDR }}
+      VAULT_TOKEN: {{ .Data.VAULT_TOKEN }}{{ end }}
   - task: deploy
     config:
       platform: linux
@@ -49,10 +56,3 @@ jobs:
         - |
           cd terraform
           terraform apply
-    params:{{ with secret "secret/digitalocean" }}
-      DO_PAT: {{ .Data.DO_PAT }}
-      DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}{{ end }}
-      DO_SSH_KEY: ~/DO_SSH_KEY
-      {{ with secret "secret/vault" }}
-      VAULT_ADDR: {{ .Data.VAULT_ADDR }}
-      VAULT_TOKEN: {{ .Data.VAULT_TOKEN }}{{ end }}
