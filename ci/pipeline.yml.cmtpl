@@ -47,6 +47,8 @@ jobs:
         args:
         - -exc
         - |
+          cd terraform
+          terraform apply
     params:{{ with secret "secret/digitalocean" }}
       DO_PAT: {{ .Data.DO_PAT }}
       DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}{{ end }}
