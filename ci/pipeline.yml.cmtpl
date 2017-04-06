@@ -26,6 +26,7 @@ jobs:
         args:
         - -exc
         - |
+          env
           vault read -field=DO_SSH_KEY secret/digitalocean > ~/DO_SSH_KEY
           cd cookbooks/mailcow
           bundle install
