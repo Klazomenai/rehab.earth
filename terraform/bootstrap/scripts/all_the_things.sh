@@ -14,6 +14,7 @@ PROJECT=$2
 DO_PAT=$3
 DO_SSH_KEY_IDS=$4
 BASE_SNAPSHOT_ID=$5
+TZ=$6
 
 #
 # Temporary test for mounting external volume for Concourse
@@ -49,6 +50,7 @@ sleep 30
 consul kv put env/bootstrap/branch $PROJECT_BRANCH
 consul kv put env/bootstrap/project $PROJECT
 consul kv put env/bootstrap/base_snapshot_id $BASE_SNAPSHOT_ID
+consul kv put env/bootstrap/tz $TZ
 echo 'export PROJECT=$(consul kv get env/bootstrap/project)' >> ~/.bashrc
 source ~/.bashrc
 
