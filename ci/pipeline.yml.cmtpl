@@ -3,7 +3,7 @@ resources:
   type: git
   source:
     uri: https://github.com/Klazomenai/rehab.earth.git
-    branch: {{key "env/bootstrap/branch"}}
+    branch: {{ key "env/bootstrap/branch" }}
 
 jobs:
 - name: deploy-mailcow
@@ -26,7 +26,6 @@ jobs:
         args:
         - -exc
         - |
-          env
           vault read -field=DO_SSH_KEY secret/digitalocean > ~/DO_SSH_KEY
           cd cookbooks/mailcow
           bundle install
@@ -55,7 +54,15 @@ jobs:
         args:
         - -exc
         - |
+          vault read -field=DO_SSH_KEY secret/digitalocean > ~/DO_SSH_KEY
           cd terraform
           terraform apply
-    params:
-      TF_VAR_base_snapshot_id: {{key "env/bootstrap/base_snapshot_id"}}
+          rm ~/DO_SSH_KEY
+    params:{{ with secret "secret/digitalocean" }}
+      TF_VAR_do_token: {{ .Data.DO_PAT }}{{ end }}
+      TF_VAR_base_snapshot_id: {{ key "env/bootstrap/base_snapshot_id" }}
+      TF_VAR_project: {{ key "env/bootstrap/project" }}
+      TF_VAR_pvt_key: ~/DO_SSH_KEY
+      {{ with secret "secret/vault" }}
+      VAULT_ADDR: {{ .Data.VAULT_ADDR }}
+      VAULT_TOKEN: {{ .Data.VAULT_TOKEN }}{{ end }}
