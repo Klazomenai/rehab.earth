@@ -57,3 +57,5 @@ jobs:
         - |
           cd terraform
           terraform apply
+    params:
+      TF_VAR_base_snapshot_id: {{key "env/bootstrap/base_snapshot_id"}}
