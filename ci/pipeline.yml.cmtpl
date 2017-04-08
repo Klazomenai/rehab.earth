@@ -6,7 +6,7 @@ resources:
     branch: {{ key "env/bootstrap/branch" }}
 
 jobs:
-- name: deploy-mailcow
+- name: deploy-mail.
   plan:
   - get: rehab.earth
     trigger: true
