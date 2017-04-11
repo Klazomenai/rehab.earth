@@ -3,12 +3,13 @@ resources:
   type: git
   source:
     uri: https://github.com/Klazomenai/rehab.earth.git
-    branch: {{key "env/bootstrap/branch"}}
+    branch: {{ key "env/bootstrap/branch" }}
 
 jobs:
-- name: mailcow
+- name: deploy-mail.
   plan:
   - get: rehab.earth
+    trigger: true
   - task: run-tests
     config:
       platform: linux
@@ -30,10 +31,38 @@ jobs:
           bundle install
           bundle exec kitchen test
           rm ~/DO_SSH_KEY
-    params:{{ with secret "secret/digitalocean" }}
-      DO_PAT: {{ .Data.DO_PAT }}
+    params:
+      DO_PAT: {{ with secret "secret/digitalocean" }}{{ .Data.DO_PAT }}
       DO_SSH_KEY_IDS: {{ .Data.DO_SSH_KEY_IDS }}{{ end }}
       DO_SSH_KEY: ~/DO_SSH_KEY
-      {{ with secret "secret/vault" }}
-      VAULT_ADDR: {{ .Data.VAULT_ADDR }}
+      VAULT_ADDR: {{ with secret "secret/vault" }}{{ .Data.VAULT_ADDR }}
+      VAULT_TOKEN: {{ .Data.VAULT_TOKEN }}{{ end }}
+  - task: deploy
+    config:
+      platform: linux
+      image_resource:
+        type: docker-image
+        source:
+          repository: klazomenai/ruby.rehab.earth
+          tag: 2.2.6
+      inputs:
+        - name: rehab.earth
+      run:
+        dir: rehab.earth
+        path: sh
+        args:
+        - -exc
+        - |
+          vault read -field=DO_SSH_KEY secret/digitalocean > ~/DO_SSH_KEY
+          cd terraform
+          terraform apply
+          rm ~/DO_SSH_KEY
+    params:
+      TF_VAR_do_token: {{ with secret "secret/digitalocean" }}{{ .Data.DO_PAT }}
+      TF_VAR_ssh_fingerprint: {{ .Data.DO_SSH_KEY_IDS }}{{ end }}
+      TF_VAR_base_snapshot_id: {{ key "env/bootstrap/base_snapshot_id" }}
+      TF_VAR_project: {{ key "env/bootstrap/project" }}
+      TF_VAR_pvt_key: ~/DO_SSH_KEY
+      TF_VAR_tz: {{ key "env/bootstrap/tz" }}
+      VAULT_ADDR: {{ with secret "secret/vault" }}{{ .Data.VAULT_ADDR }}
       VAULT_TOKEN: {{ .Data.VAULT_TOKEN }}{{ end }}

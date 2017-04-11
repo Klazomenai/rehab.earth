@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -e -o -x errexit
+set -e -o errexit
 
 PROJECT_BRANCH=$1
 

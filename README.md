@@ -39,14 +39,9 @@ export TF_VAR_tz=""
 export TF_VAR_ssh_fingerprint=""
 export TF_VAR_do_token=""
 # Something like... ssh-keygen -t rsa -f ~/.ssh/${user}.${project}_rsa
-export TF_VAR_pub_key="$HOME/.ssh/${user}.${project}_rsa.pub"
 export TF_VAR_pvt_key="$HOME/.ssh/${user}.${project}_rsa"
-```
-
-Optional.
-```sh
-# Branch to pull from rehab.earth. Defaults to master
-export TF_VAR_project_branch=""
+# Branch to pull from rehab.earth for deployments.
+export TF_VAR_project_branch="master"
 ```
 
 Running with Terraform v0.8.4.
