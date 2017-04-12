@@ -13,3 +13,8 @@ services:
       rehab.earth:
         aliases:
           - geth-node.rehab.earth
+
+networks:
+  rehab.earth:
+    external:
+      name: rehab.earth
