@@ -1,0 +1,15 @@
+---
+version: "2"
+services:
+  geth-node:
+    image: ethereum/client-go:alpine
+    container_name: geth-node
+    hostname: geth-node.rehab.earth
+    ports:
+      - "30303:30303"
+    volumes:
+      - "/tmp/ethereum:/root/.ethereum"
+    networks:
+      rehab.earth:
+        aliases:
+          - geth-node.rehab.earth
