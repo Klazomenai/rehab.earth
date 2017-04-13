@@ -15,6 +15,17 @@ If you fancy getting stuck in with the development, come join the community on t
 [Project Entorpy Rocket](http://project-entropy.com/pages/community), and see what you can pick up from
 [Trello](https://trello.com/b/IAKTSzT9/infrastructure-alpha).
 
+# Components
+
+### Terraform
+Tool to let you safely and predictably create, change, and improve production infrastructure. It is an open source tool that codifies APIs into declarative configuration files that can be shared amongst team members, treated as code, edited, reviewed, and versioned.
+
+### Consul
+a tool for discovering and configuring services in your infrastructure
+
+### Vault
+Vault secures, stores, and tightly controls access to tokens, passwords, certificates, API keys, and other secrets in modern computing.
+
 # Tests
 
 ```sh
@@ -26,20 +37,20 @@ popd
 
 # Inception
 
-Create base image and ensure relevant env var is exported:
+Create base image from centos-7-x64 and ensure relevant env var is exported:
 [terraform/base/README.md](https://github.com/Klazomenai/rehab.earth/blob/master/terraform/base/README.md)
 
 Ensure the following variables are also available according to your shell of choice.
 ```sh
 # Personal
-export user=""
-export TF_VAR_project=""
-export TF_VAR_tz=""
+export user="entropy"
+export TF_VAR_project="project_entropy"
+export TF_VAR_tz="Pacific/Auckland"
 # Generated from Digital Ocean
-export TF_VAR_ssh_fingerprint=""
-export TF_VAR_do_token=""
+export TF_VAR_ssh_fingerprint="35:88:b4:92:Derpderp:GetMeFromDigitalOcean"
+export TF_VAR_do_token="I AM AN API KEY"
 # Something like... ssh-keygen -t rsa -f ~/.ssh/${user}.${project}_rsa
-export TF_VAR_pvt_key="$HOME/.ssh/${user}.${project}_rsa"
+export TF_VAR_pvt_key="$HOME/.ssh/secretsshkey"
 # Branch to pull from rehab.earth for deployments.
 export TF_VAR_project_branch="master"
 ```
