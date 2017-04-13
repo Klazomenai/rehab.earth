@@ -22,6 +22,11 @@ TZ=$6
 mkdir /tmp/worker-state
 
 #
+# Git
+#
+yum install -y git
+
+#
 # Pull off git, take branch as input for Terraform variables
 #
 pushd ~
