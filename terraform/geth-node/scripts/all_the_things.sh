@@ -25,5 +25,6 @@ docker network create rehab.earth --ip-range=172.100.0.0/24 --gateway=172.100.0.
 # Geth Node
 #
 pushd ~/rehab.earth/docker/geth-node
+docker-compose build
 docker-compose up -d
 popd
