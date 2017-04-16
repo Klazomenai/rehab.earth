@@ -13,6 +13,8 @@ services:
       - --networkid
       - "99"
       - --nodiscover
+      - --cache
+      - "1024"
     container_name: geth-node
     hostname: geth-node.rehab.earth
     ports:
