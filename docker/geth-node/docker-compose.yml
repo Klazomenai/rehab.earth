@@ -12,6 +12,7 @@ services:
       - ~/.ethereum/net99
       - --networkid
       - "99"
+      - --nodiscover
     container_name: geth-node
     hostname: geth-node.rehab.earth
     ports:
