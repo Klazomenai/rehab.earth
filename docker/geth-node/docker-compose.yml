@@ -20,7 +20,7 @@ services:
     ports:
       - "30303:30303"
     volumes:
-      - "/tmp/ethereum:/root/.ethereum"
+      - "/tmp/ethereum:/root"
     networks:
       rehab.earth:
         aliases:
