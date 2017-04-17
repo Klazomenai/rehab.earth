@@ -4,3 +4,5 @@ FROM ethereum/client-go:alpine
 ADD CustomGenesis.json /root/
 
 RUN /geth --datadir ~/.ethereum/net99 init ~/CustomGenesis.json
+
+ADD ./keystore/* /root/.ethereum/net99/keystore/
